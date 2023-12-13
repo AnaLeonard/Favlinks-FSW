@@ -1,8 +1,25 @@
+//import db.js
+const express = require('express')
+const cors = require('cors')
+const db = require('./db')
+const app = express()
+const port = 3000
+app.use(express.json())
+app.use(cors())
+app.get('/api/links', db.getLinks)
+app.post('/api/links', db.addLink)
+app.post('/api/links/:id', db.updateLink)
+app.post('/api/links/:id', db.deleteLink)
+
+app.listen(port, () => {
+console.log(`App running on port ${port}.`)
+})
+
 const Pool = require('pg').Pool
 const pool = new Pool({
 user: 'analeonardo',
 host: 'localhost',
-database: 'favlinks',
+database: 'linksapi',
 password: '2002',
 port: 5432,
 })
@@ -67,6 +84,7 @@ const getLinks = (req, res) => {
     addLink,
     updateLink,
     deleteLink
+
 
     }
 
